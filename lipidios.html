@@ -2,71 +2,117 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa Interativo dos Lipídios</title>
+  <title>Mapa Interativo: Lipídios no Corpo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f0f0f0;
-      padding: 30px;
-      text-align: center;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    img {
-      max-width: 100%;
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    svg {
+      max-width: 300px;
       height: auto;
     }
 
     .info-box {
-      margin-top: 20px;
       background: white;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      width: 300px;
     }
 
     .info-box h2 {
       margin-top: 0;
     }
+
+    .area {
+      cursor: pointer;
+      transition: fill 0.3s;
+    }
+
+    .area:hover {
+      fill: #ff9999;
+    }
   </style>
 </head>
 <body>
-  <h1>Mapa Interativo: Lipídios no Corpo</h1>
+  <h1>Mapa Interativo: Ação dos Lipídios no Corpo</h1>
+  <div class="container">
+    <svg viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo humano simplificado -->
+      <path d="M100 20 
+               C 90 50, 110 50, 100 80 
+               C 80 110, 120 110, 100 140 
+               C 70 200, 130 200, 100 260 
+               C 80 300, 120 300, 100 340 
+               C 90 370, 110 370, 100 400 
+               L 90 480 L 110 480 L 100 400 Z"
+            fill="#cce5ff"
+            stroke="#000"
+            stroke-width="2"/>
 
-  <!-- Imagem integrada -->
-  <img
-    src="https://static.vecteezy.com/ti/vetor-gratis/p1/2143962-corpo-humano-anatomia-cerebro-pulmoes-coracao-figado-intestinos-desenho-vetor.jpg"
-    usemap="#mapaCorpo"
-    width="300"
-    alt="Corpo Humano">
+      <!-- Cérebro -->
+      <circle class="area" id="cerebro" cx="100" cy="40" r="15" fill="#ffd6d6" />
+      
+      <!-- Coração -->
+      <circle class="area" id="coracao" cx="100" cy="130" r="12" fill="#ff9999" />
 
-  <map name="mapaCorpo">
-    <!-- Coordenadas ajustadas para a imagem (com width = 300) -->
-    <area shape="circle" coords="150,55,20" alt="Cérebro" title="Cérebro" onmouseover="mostrarInfo('cerebro')">
-    <area shape="circle" coords="356,378,417,487"Coração" title="Coração" onmouseover="mostrarInfo('coracao')">
-    <area shape="circle" coords="150,180,30" alt="Células" title="Células" onmouseover="mostrarInfo('celulas')">
-  </map>
+      <!-- Abdômen (representando células) -->
+      <ellipse class="area" id="celulas" cx="100" cy="230" rx="18" ry="25" fill="#ccffcc" />
+    </svg>
 
-  <div class="info-box" id="info">
-    <h2>Passe o mouse sobre uma parte do corpo</h2>
-    <p>Veja como os lipídios atuam em diferentes regiões do corpo humano.</p>
+    <div class="info-box" id="info">
+      <h2>Passe o mouse sobre o corpo</h2>
+      <p>Descubra a importância dos lipídios em cada região.</p>
+    </div>
   </div>
 
   <script>
-    const dados = {
-      cerebro: "Os lipídios são essenciais no cérebro. Eles fazem parte da estrutura dos neurônios e ajudam na transmissão de sinais.",
-      coracao: "Os lipídios têm papel fundamental na saúde do coração. Alguns ajudam, outros podem causar doenças cardíacas.",
-      celulas: "As membranas de todas as células do corpo são feitas de lipídios, protegendo e controlando o que entra e sai."
+    const info = document.getElementById("info");
+
+    const data = {
+      cerebro: {
+        title: "Cérebro",
+        text: "Os lipídios são vitais para o funcionamento cerebral. Eles compõem a maior parte da estrutura do cérebro e ajudam na transmissão de sinais entre neurônios."
+      },
+      coracao: {
+        title: "Coração",
+        text: "Lipídios como o colesterol e os ácidos graxos têm papel importante na saúde do coração, podendo protegê-lo ou prejudicá-lo, dependendo do tipo e quantidade."
+      },
+      celulas: {
+        title: "Células",
+        text: "As membranas celulares são feitas de lipídios. Eles ajudam a proteger a célula e controlar o que entra e sai dela."
+      }
     };
 
-    function mostrarInfo(parte) {
-      document.getElementById('info').innerHTML = `
-        <h2>${parte.charAt(0).toUpperCase() + parte.slice(1)}</h2>
-        <p>${dados[parte]}</p>
-      `;
-    }
+    document.querySelectorAll(".area").forEach(part => {
+      part.addEventListener("mouseover", () => {
+        const id = part.id;
+        info.innerHTML = `<h2>${data[id].title}</h2><p>${data[id].text}</p>`;
+      });
+
+      part.addEventListener("mouseleave", () => {
+        info.innerHTML = `
+          <h2>Passe o mouse sobre o corpo</h2>
+          <p>Descubra a importância dos lipídios em cada região.</p>`;
+      });
+    });
   </script>
 </body>
 </html>
