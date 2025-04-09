@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa Interativo dos Lipídios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
+    h1 {
+      margin: 20px 0;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      padding: 20px;
+    }
+
+    svg {
+      width: 300px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .info-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    .info-box h2 {
+      margin-top: 0;
+    }
+
+    .part:hover {
+      fill: #ff9999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa Interativo: A Função dos Lipídios no Corpo</h1>
+  <div class="container">
+   
+    <svg viewBox="0 0 200 500">
+      <circle class="part" id="cerebro" cx="100" cy="60" r="30" fill="#cce5ff" />
+      <rect class="part" id="coracao" x="85" y="140" width="30" height="30" fill="#ffcccc" />
+      <rect class="part" id="celulas" x="70" y="250" width="60" height="80" fill="#ccffcc" />
+    </svg>
+
+  
+    <div class="info-box" id="info">
+      <h2>Passe o mouse em uma parte do corpo</h2>
+      <p>Você verá como os lipídios atuam em diferentes áreas do corpo humano.</p>
+    </div>
+  </div>
+
+  <script>
+    const info = document.getElementById("info");
+
+    const data = {
+      cerebro: {
+        title: "Cérebro",
+        text: "O cérebro é composto por cerca de 60% de gordura! Os lipídios são essenciais para a estrutura dos neurônios e para o funcionamento do sistema nervoso."
+      },
+      coracao: {
+        title: "Coração",
+        text: "Lipídios como os ácidos graxos ômega-3 ajudam a proteger o coração, mas o excesso de gorduras saturadas pode causar doenças cardiovasculares."
+      },
+      celulas: {
+        title: "Células",
+        text: "Os lipídios formam a membrana celular (bicamada lipídica), sendo fundamentais para proteger a célula e controlar o que entra e sai dela."
+      }
+    };
+
+  
+    document.querySelectorAll(".part").forEach(part => {
+      part.addEventListener("mouseover", () => {
+        const id = part.id;
+        info.innerHTML = `<h2>${data[id].title}</h2><p>${data[id].text}</p>`;
+      });
+    });
+  </script>
+</body>
+</html>
