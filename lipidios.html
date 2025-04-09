@@ -35,18 +35,18 @@
 <body>
   <h1>Mapa Interativo: Lipídios no Corpo</h1>
 
-  <!-- 👇 Aqui você coloca o link da sua imagem ou nome do arquivo salvo -->
-  <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/2143962-corpo-humano-anatomia-cerebro-pulmoes-coracao-figado-intestinos-desenho-vetor.jpg" usemap="#mapaCorpo" alt="Corpo Humano">
+  <!-- Imagem integrada -->
+  <img
+    src="https://static.vecteezy.com/ti/vetor-gratis/p1/2143962-corpo-humano-anatomia-cerebro-pulmoes-coracao-figado-intestinos-desenho-vetor.jpg"
+    usemap="#mapaCorpo"
+    width="300"
+    alt="Corpo Humano">
 
   <map name="mapaCorpo">
-    <!-- Cérebro -->
-    <area shape="circle" coords="150,80,30" alt="Cérebro" title="Cérebro" onmouseover="mostrarInfo('cerebro')">
-    
-    <!-- Coração -->
-    <area shape="circle" coords="150,180,25" alt="Coração" title="Coração" onmouseover="mostrarInfo('coracao')">
-    
-    <!-- Abdômen (representando células) -->
-    <area shape="circle" coords="150,280,35" alt="Células" title="Células" onmouseover="mostrarInfo('celulas')">
+    <!-- Coordenadas ajustadas para a imagem (com width = 300) -->
+    <area shape="circle" coords="150,55,20" alt="Cérebro" title="Cérebro" onmouseover="mostrarInfo('cerebro')">
+    <area shape="circle" coords="150,115,20" alt="Coração" title="Coração" onmouseover="mostrarInfo('coracao')">
+    <area shape="circle" coords="150,180,30" alt="Células" title="Células" onmouseover="mostrarInfo('celulas')">
   </map>
 
   <div class="info-box" id="info">
