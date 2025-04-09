@@ -2,33 +2,31 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa Interativo dos Lipídios</title>
+  <title>Mapa Interativo: Lipídios no Corpo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f0f0f0;
       margin: 0;
-      padding: 0;
-      background: #f3f3f3;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     h1 {
-      margin: 20px 0;
+      margin-bottom: 30px;
     }
 
     .container {
       display: flex;
       gap: 40px;
       align-items: center;
-      padding: 20px;
     }
 
     svg {
-      width: 300px;
+      max-width: 300px;
       height: auto;
-      cursor: pointer;
     }
 
     .info-box {
@@ -43,25 +41,45 @@
       margin-top: 0;
     }
 
-    .part:hover {
+    .area {
+      cursor: pointer;
+      transition: fill 0.3s;
+    }
+
+    .area:hover {
       fill: #ff9999;
     }
   </style>
 </head>
 <body>
-  <h1>Mapa Interativo: A Função dos Lipídios no Corpo</h1>
+  <h1>Mapa Interativo: Ação dos Lipídios no Corpo</h1>
   <div class="container">
-   
-    <svg viewBox="0 0 200 500">
-      <circle class="part" id="cerebro" cx="100" cy="60" r="30" fill="#cce5ff" />
-      <rect class="part" id="coracao" x="85" y="140" width="30" height="30" fill="#ffcccc" />
-      <rect class="part" id="celulas" x="70" y="250" width="60" height="80" fill="#ccffcc" />
+    <svg viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo humano simplificado -->
+      <path d="M100 20 
+               C 90 50, 110 50, 100 80 
+               C 80 110, 120 110, 100 140 
+               C 70 200, 130 200, 100 260 
+               C 80 300, 120 300, 100 340 
+               C 90 370, 110 370, 100 400 
+               L 90 480 L 110 480 L 100 400 Z"
+            fill="#cce5ff"
+            stroke="#000"
+            stroke-width="2"/>
+
+      <!-- Cérebro -->
+      <circle class="area" id="cerebro" cx="100" cy="40" r="15" fill="#ffd6d6" />
+      
+      <!-- Coração -->
+      <circle class="area" id="coracao" cx="100" cy="130" r="12" fill="#ff9999" />
+
+      <!-- Abdômen (representando células) -->
+      <ellipse class="area" id="celulas" cx="100" cy="230" rx="18" ry="25" fill="#ccffcc" />
     </svg>
 
-  
     <div class="info-box" id="info">
-      <h2>Passe o mouse em uma parte do corpo</h2>
-      <p>Você verá como os lipídios atuam em diferentes áreas do corpo humano.</p>
+      <h2>Passe o mouse sobre o corpo</h2>
+      <p>Descubra a importância dos lipídios em cada região.</p>
     </div>
   </div>
 
@@ -71,23 +89,28 @@
     const data = {
       cerebro: {
         title: "Cérebro",
-        text: "O cérebro é composto por cerca de 60% de gordura! Os lipídios são essenciais para a estrutura dos neurônios e para o funcionamento do sistema nervoso."
+        text: "Os lipídios são vitais para o funcionamento cerebral. Eles compõem a maior parte da estrutura do cérebro e ajudam na transmissão de sinais entre neurônios."
       },
       coracao: {
         title: "Coração",
-        text: "Lipídios como os ácidos graxos ômega-3 ajudam a proteger o coração, mas o excesso de gorduras saturadas pode causar doenças cardiovasculares."
+        text: "Lipídios como o colesterol e os ácidos graxos têm papel importante na saúde do coração, podendo protegê-lo ou prejudicá-lo, dependendo do tipo e quantidade."
       },
       celulas: {
         title: "Células",
-        text: "Os lipídios formam a membrana celular (bicamada lipídica), sendo fundamentais para proteger a célula e controlar o que entra e sai dela."
+        text: "As membranas celulares são feitas de lipídios. Eles ajudam a proteger a célula e controlar o que entra e sai dela."
       }
     };
 
-  
-    document.querySelectorAll(".part").forEach(part => {
+    document.querySelectorAll(".area").forEach(part => {
       part.addEventListener("mouseover", () => {
         const id = part.id;
         info.innerHTML = `<h2>${data[id].title}</h2><p>${data[id].text}</p>`;
+      });
+
+      part.addEventListener("mouseleave", () => {
+        info.innerHTML = `
+          <h2>Passe o mouse sobre o corpo</h2>
+          <p>Descubra a importância dos lipídios em cada região.</p>`;
       });
     });
   </script>
